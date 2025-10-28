@@ -1,0 +1,12 @@
+{% extends "layout.html" %}
+{% block title %}
+DJANGO APP
+{% endblock %}
+{% block content%}
+<h1 class="text-center mt-5"> Are you sure you want to Delete the tweet ??</h1>
+<form method="POST">
+    {% csrf_token%}
+    <button class="btn btn-danger">Delete</button>
+    <a class="btn btn-success" href="{% url 'tweet_list'%}">Cancel</a>
+</form>
+{% endblock %}
