@@ -9,13 +9,19 @@ DJANGO APP
 <div class="container row gap-3">
     {% for tweet in tweets %}
     <div class="card" style="width: 18rem;">
-  <img src="{{tweet.photo.url}}" class="card-img-top" alt="...">
+  {% if tweet.photo %}
+  <img src="{{ tweet.photo.url }}" class="card-img-top" alt="...">
+{% else %}
+  <img src="https://via.placeholder.com/300x200?text=No+Image" class="card-img-top" alt="No Image">
+{% endif %}
+
   <div class="card-body">
     <h5 class="card-title">{{tweet.user.username}}</h5>
     <p class="card-text">{{tweet.text}}</p>
+    {% if user.is_authenticated and tweet.user.id == user.id %}
     <a href="{% url 'tweet_edit' tweet.id%}" class="btn btn-primary">Edit</a>
     <a href="{% url 'tweet_delete' tweet.id%}" class="btn btn-danger">Delete</a>
-
+{% endif %}
   </div>
 </div>
     {% endfor %}
